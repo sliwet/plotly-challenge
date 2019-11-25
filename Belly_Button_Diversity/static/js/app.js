@@ -16,9 +16,9 @@ let buildMetadata = sample => {
     // d3.select("#sample-metadata").html(() => samples_metadata_str);
 
     let wfreq = samples_metadata.WFREQ;
-    console.log(`dkwon@todo: ${wfreq} buildgauge`);
+    // console.log(`dkwon@todo: ${wfreq} buildgauge`);
     // @TODO
-    // buildGauge(data.WFREQ);
+    buildGauge(wfreq);
   });
 }
 
@@ -54,7 +54,7 @@ let buildCharts = sample => {
       // title: 'Marker Size and Color',
       xaxis: { title: "OTU ID" },
       showlegend: false,
-      height: 600,
+      height: 500,
       width: 1000
     };
 
@@ -78,8 +78,8 @@ let buildCharts = sample => {
     };
 
     let layout = {
-      width: 800,
-      height: 600
+      width: 500,
+      height: 400
       // title: "Pie Chart",
     };
 
