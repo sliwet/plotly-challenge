@@ -1,24 +1,25 @@
 
 let buildGauge = wfreq => {
     // Enter a speed between 0 and 180
-    var level = 175;
+    let level = wfreq;
 
     // Trig to calc meter point
-    var degrees = 180 - level,
-        radius = .5;
-    var radians = degrees * Math.PI / 180;
-    var x = radius * Math.cos(radians);
-    var y = radius * Math.sin(radians);
+    let radius = .5;
+    let radians = (1 - wfreq / 9) * Math.PI;
+    let x = radius * Math.cos(radians);
+    let y = radius * Math.sin(radians);
 
     // Path: may have to change to create a better triangle
-    var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
+    let mainPath = 'M -.0 -0.025 L .0 0.025 L ',
         pathX = String(x),
         space = ' ',
         pathY = String(y),
         pathEnd = ' Z';
-    var path = mainPath.concat(pathX, space, pathY, pathEnd);
+    let path = mainPath.concat(pathX, space, pathY, pathEnd);
 
-    var data = [{
+    let test =  ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''];
+
+    let data = [{
         type: 'scatter',
         x: [0], y: [0],
         marker: { size: 28, color: '850000' },
@@ -28,26 +29,32 @@ let buildGauge = wfreq => {
         hoverinfo: 'text+name'
     },
     {
-        values: [50 / 6, 50 / 6, 50 / 6, 50 / 6, 50 / 6, 50 / 6, 50],
+        values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
         rotation: 90,
-        text: ['TOO FAST!', 'Pretty Fast', 'Fast', 'Average',
-            'Slow', 'Super Slow', ''],
+        text: test,
         textinfo: 'text',
         textposition: 'inside',
         marker: {
-            colors: ['rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)',
-                'rgba(170, 202, 42, .5)', 'rgba(202, 209, 95, .5)',
-                'rgba(210, 206, 145, .5)', 'rgba(232, 226, 202, .5)',
+            colors: [
+                'rgba(14, 127, 0, .5)',
+                'rgba(41, 139, 25, .5)',
+                'rgba(68, 151, 50, .5)', 
+                'rgba(96, 164, 75, .5)', 
+                'rgba(123, 176, 101, .5)',
+                'rgba(150, 189, 126, .5)', 
+                'rgba(177, 201, 151, .5)',
+                'rgba(204, 214, 176, .5)', 
+                'rgba(232, 226, 202, .5)',
                 'rgba(255, 255, 255, 0)']
         },
-        labels: ['151-180', '121-150', '91-120', '61-90', '31-60', '0-30', ''],
+        labels:test,
         hoverinfo: 'label',
         hole: .5,
         type: 'pie',
         showlegend: false
     }];
 
-    var layout = {
+    let layout = {
         shapes: [{
             type: 'path',
             path: path,
@@ -56,9 +63,9 @@ let buildGauge = wfreq => {
                 color: '850000'
             }
         }],
-        title: '<b>Gauge</b> <br> Speed 0-100',
-        height: 1000,
-        width: 1000,
+        title: '<b>Belly Button Washing Frequency</b> <br>Scrubs per Week',
+        height: 500,
+        width: 500,
         xaxis: {
             zeroline: false, showticklabels: false,
             showgrid: false, range: [-1, 1]
@@ -70,7 +77,5 @@ let buildGauge = wfreq => {
     };
 
     Plotly.newPlot('gauge', data, layout);
-
-
 }
 

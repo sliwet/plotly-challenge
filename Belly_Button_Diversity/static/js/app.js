@@ -5,7 +5,7 @@ let buildMetadata = sample => {
     smetadata = d3.select("#sample-metadata");
     smetadata.html('');
     Object.entries(samples_metadata).forEach(([key, value]) => {
-      smetadata.append('div').html(`${key}: ${value}<br><br>`);
+      smetadata.append('div').html(`${key}: ${value}<br>`);
     });
 
     // The following code will do the same thing
@@ -15,10 +15,10 @@ let buildMetadata = sample => {
     // });
     // d3.select("#sample-metadata").html(() => samples_metadata_str);
 
-    let wfreq = samples_metadata.WFREQ;
+    // let wfreq = samples_metadata.WFREQ;
     // console.log(`dkwon@todo: ${wfreq} buildgauge`);
     // @TODO
-    buildGauge(wfreq);
+    buildGauge(samples_metadata.WFREQ);
   });
 }
 
@@ -72,8 +72,8 @@ let buildCharts = sample => {
     let trace = {
       labels: selected.map(row => row.x),
       values: selected.map(row => row.y),
-      hovertemplate: data.map(row => row.hovertext),
-      // hovertext: selected.map(row => row.hovertext),
+      // hovertemplate: data.map(row => row.hovertext),
+      hovertext: selected.map(row => row.hovertext),
       type: 'pie'
     };
 
