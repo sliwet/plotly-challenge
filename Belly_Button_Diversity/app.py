@@ -16,7 +16,12 @@ app = Flask(__name__)
 #################################################
 # Database Setup
 #################################################
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI', '') or "sqlite:///db/bellybutton.sqlite"
+# Goto Heroku settings - Reveal Conf Vars 
+# Key = SQLALCHEMY_DATABASE_URI
+# Value = sqlite:///db/bellybutton.sqlite
+
 db = SQLAlchemy(app)
 
 engine = db.engine
